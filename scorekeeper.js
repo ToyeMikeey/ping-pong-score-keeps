@@ -13,6 +13,7 @@ let winScore = numGame.value
 const resetGame = () => {
     p1score = 0;
     p2score = 0;
+    gameWon = false;
     player1Dis.textContent = p1score;
     player2Dis.textContent = p2score;
     player2.style.color = ''
