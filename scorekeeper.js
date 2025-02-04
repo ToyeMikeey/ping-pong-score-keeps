@@ -2,21 +2,29 @@
 
 const player1 = {
     score: 0,
+    set: 0,
     button: document.querySelector('#p1b'),
-    display: document.querySelector('#p1s')
+    display: document.querySelector('#p1s'),
+    sets: document.querySelector('#p1set')
 };
 
 const player2 = {
     score: 0,
+    set: 0,
     button: document.querySelector('#p2b'),
-    display: document.querySelector('#p2s')
+    display: document.querySelector('#p2s'),
+    sets: document.querySelector('#p2set')
 };
 
 const numGame = document.querySelector('#winningScore');
 const newGame = document.querySelector('#resetScore');
+const setGame = document.querySelector('#setsplay');
 
 let gameWon = false;
-let winScore = numGame.value
+let matchWon = false;
+let originalWinScore = numGame.value;
+let winScore = originalWinScore;
+let setWin = setGame.value;
 
 
 for (let i = 3; i < 22; i++) {
@@ -25,32 +33,62 @@ for (let i = 3; i < 22; i++) {
     optns.value = i;
     numGame.appendChild(optns);
 }
+for (let i = 1; i < 22; i++) {
+    const opton = document.createElement('option');
+    opton.text = i;
+    opton.value = i;
+    setGame.appendChild(opton);
+}
 numGame.addEventListener("change", () => {
     winScore = parseInt(numGame.value);
+    originalWinScore = winScore;
     resetGame();
+});
+setGame.addEventListener("change", () => {
+    totalSets = parseInt(setGame.value);
+    resetMatch();
 });
 
 
 const updateScore = (player, opponent) => {
-    if (!gameWon) {
+    if (!gameWon && !matchWon) {
         player.score++;
         player.display.textContent = player.score;
+
         if (player.score === winScore) {
             gameWon = true;
             player.display.style.color = 'green'
             opponent.display.style.color = 'red'
             player.button.style.color = 'green'
             opponent.button.style.color = 'red'
+            updateSet(player, opponent)
+        }
+        if (player.score === winScore - 1 && opponent.score === winScore - 1) {
+            winScore++
         }
     }
-
+}
+const updateSet = (player, opponent) => {
+    if (gameWon) {
+        player.set++;
+        player.sets.textContent = player.set;
+        gameWon = false;
+        resetGame()
+        if (player.set === Math.ceil(totalSets / 2)) {
+            matchWon = true;
+            player.sets.style.color = 'green'
+            opponent.sets.style.color = 'red'
+            player.button.style.color = 'green'
+            opponent.button.style.color = 'red'
+        }
+    }
 }
 
 player1.button.addEventListener('click', () => {
-    updateScore(player1,player2)
+    updateScore(player1, player2)
 })
 player2.button.addEventListener('click', () => {
-    updateScore(player2,player1)
+    updateScore(player2, player1)
 
 })
 const resetGame = () => {
@@ -63,8 +101,19 @@ const resetGame = () => {
     player2.button.style.color = ''
     player1.display.style.color = ''
     player2.display.style.color = ''
+    winScore = originalWinScore;
 }
-newGame.addEventListener('click', resetGame);
+const resetMatch = () => {
+    resetGame();
+    player1.set = 0;
+    player2.set = 0;
+    matchWon = false;
+    player1.sets.textContent = player1.set;
+    player2.sets.textContent = player2.set;
+    player1.sets.style.color = '';
+    player2.sets.style.color = '';
+};
+newGame.addEventListener('click', resetMatch);
 
 
 // initial method
