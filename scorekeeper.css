@@ -2,45 +2,45 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background: linear-gradient(30deg, #a4c47c, #a98e87);
 }
-
 
 #container {
     background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 320px;
+    width: 350px;
+    height: auto;
 }
-
 
 h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
     font-weight: bold;
+    color: #333;
 }
-
 
 #bttncon {
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 button {
-    padding: 10px 16px;
+    padding: 12px 18px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
@@ -48,24 +48,42 @@ button {
 }
 
 #p1b {
-    background-color: rgb(189, 104, 184);
+    background-color: #4CAF50;
     color: white;
 }
 
 #p2b {
-    background-color: rgb(105, 130, 212);
+    background-color: #2196F3;
     color: white;
 }
 
 #resetScore {
-    background-color: rgba(222, 52, 52, 0.7);
+    background-color: #f44336;
     color: white;
 }
 
 button:hover {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 button:active {
     transform: scale(0.95);
+}
+
+#names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+input {
+    margin-top: 5px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1rem;
+    width: 200px;
+    text-align: center;
 }

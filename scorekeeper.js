@@ -115,6 +115,15 @@ const resetMatch = () => {
 };
 newGame.addEventListener('click', resetMatch);
 
+const name1 = document.querySelector('#p1n')
+const name2 = document.querySelector('#p2n')
+name1.addEventListener('change', ()=>{
+    player1.button.textContent = name1.value
+})
+name2.addEventListener('change', ()=>{
+    player2.button.textContent = name2.value
+})
+
 
 // initial method
 
